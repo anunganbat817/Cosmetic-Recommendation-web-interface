@@ -1,0 +1,52 @@
+
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>{% block title %} SkinCare Recommendation System {% endblock %}</h1>
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />  
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script> 
+          <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+      <script>
+          $(document).ready(function(){
+              $("#livebox").on("input",function(e){
+                  $("#datalist").empty();
+                  $.ajax({
+                      method:"post",
+                      url:"/results",
+                      data:{text:$("#livebox").val()},
+                      success:function(res){
+                          var data = "<div class='list-group'>";
+                          $.each(res,function(index,value){
+                              data += "<p class='list-group-item list-group-item-action'>"+value.name+"</p>";
+                          });
+                          data += "</div>";
+                          $("#datalist").html(data);
+                      }
+                  });
+              });
+          });
+      </script> 
+    <body style="background-image: #f2e6ff;">
+    </body>
+    <style>
+        h1 {text-align: center; background-color: #F7EDDA; margin: 30px; font-family: "Lucida Console"; font-size: 40px;}
+    </style>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      <ul class="flashes">
+      {% for message in messages %}
+        <li>{{ message }}</li>
+      {% endfor %}
+      </ul>
+    {% endif %}
+  {% endwith %}
+  {% from "_formhelpers.html" import render_field %}
+  <form action="" method="post" style="text-align:center" color= "white" novalidate>
+    <dl>
+      {{ render_field(form.select) }}
+      <p>
+      {{ render_field(form.search) }}
+    </p></dl>
+    <p><input type="submit" value="Search">
+  </p></form>
+{% endblock %}

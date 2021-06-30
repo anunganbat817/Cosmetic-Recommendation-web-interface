@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Recommended Products</title>
+    <style>
+       body {
+       background-image: url('https://wallpapercave.com/wp/wp6836080.jpg');
+       background-repeat: no-repeat;
+       background-attachment: fixed;  
+       background-size: cover;
+     }
+      .glow {
+        font-size: 70px;
+        font-family: "Papyrus";
+        color: #ffffff;;
+        text-align: center;
+        -webkit-animation: glow 1s ease-in-out infinite alternate;
+        -moz-animation: glow 1s ease-in-out infinite alternate;
+        animation: glow 1s ease-in-out infinite alternate;
+      }
+      .center {
+        text-align: center;
+        margin: auto;
+      }
+      @-webkit-keyframes glow {
+        from {
+          text-shadow: 0 0 10px #eeeeee, 0 0 20px #000000, 0 0 30px #000000, 0 0 40px #000000, 
+                       0 0 50px #9554b3, 0 0 60px #9554b3, 0 0 70px #9554b3;
+        }
+        to {
+          text-shadow: 0 0 20px #eeeeee, 0 0 30px #ff4da6, 0 0 40px #ff4da6, 0 0 50px #ff4da6,
+                       0 0 60px #ff4da6, 0 0 70px #ff4da6, 0 0 80px #ff4da6;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <h1 class="glow">TADAAA!!!</h1>
+    <div class ="center">
+        {% for table in tables %}
+            {{titles[loop.index]}}
+            {{ table|safe }}
+        {% endfor %}
+    </div>
+  </body>
+</html>
